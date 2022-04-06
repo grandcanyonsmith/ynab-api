@@ -732,7 +732,6 @@ class TransactionsApi(object):
         Returns all transactions for a specified category  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-
         >>> thread = api.get_transactions_by_category(budget_id, category_id, async_req=True)
         >>> result = thread.get()
 
