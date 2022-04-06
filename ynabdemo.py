@@ -28,8 +28,10 @@ Or, populate the fields directly in your code.
 
 with open('secrets.json') as f:
     secrets = json.load(f)
-budget_id = secrets['budget_id']
-api_key = secrets['api_key']
+budget_id = "72f55793-a9fc-4538-92fe-63be2c1cdddc"
+api_key = "11059c76ab063accae00d9439c417d305fdbb41d45ebcab62785a65065d29992"
+print(budget_id)
+print(api_key)
 
 configuration = ynab_api.Configuration(
     host="https://api.youneedabudget.com/v1")
@@ -39,8 +41,20 @@ configuration.api_key_prefix['bearer'] = 'Bearer'
 with ynab_api.ApiClient(configuration) as api_client:
     api_instance = accounts_api.AccountsApi(api_client)
 
+
     try:
         api_response = api_instance.get_accounts(budget_id)
-        pprint(api_response)
+        print(len(api_response['data']['accounts']))
+        for x in api_response['data']['accounts']:
+            print(x['name'])
+            balance = (int(x['balance'])/10)
+            print("$" + str(balance))
+            
+        
+        
+        # pprint(api_response)
     except ynab_api.ApiException as e:
         print("Exception: %s\n" % e)
+# curl -X GET "https://api.youneedabudget.com/v1/budgets/72f55793-a9fc-4538-92fe-63be2c1cdddc/accounts" -H "accept: application/json" -H "Authorization: Bearer 11059c76ab063accae00d9439c417d305fdbb41d45ebcab62785a65065d29992"
+
+

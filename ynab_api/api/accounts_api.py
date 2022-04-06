@@ -26,7 +26,7 @@ class AccountsApi(object):
 
     Do not edit the class manually.
     """
-    def __init__(self, api_client=None):
+    def __init__(self, api_client=''):
         if api_client is None:
             api_client = ApiClient()
         self.api_client = api_client
@@ -320,3 +320,6 @@ class AccountsApi(object):
         kwargs['budget_id'] = \
             budget_id
         return self.get_accounts_endpoint.call_with_http_info(**kwargs)
+
+#get the budgets
+

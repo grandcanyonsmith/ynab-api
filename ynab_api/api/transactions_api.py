@@ -1003,3 +1003,8 @@ class TransactionsApi(object):
         kwargs['data'] = \
             data
         return self.update_transactions_endpoint.call_with_http_info(**kwargs)
+
+
+#import transaction below
+
+

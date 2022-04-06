@@ -347,3 +347,4 @@ class Account(ModelNormal):
                 raise ApiAttributeError(
                     f"`{var_name}` is a read-only attribute. Use `from_openapi_data` to instantiate "
                     f"class with read only attributes.")
+
