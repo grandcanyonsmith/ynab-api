@@ -27,11 +27,11 @@ Or, populate the fields directly in your code.
 '''
 
 with open('secrets.json') as f:
-    secrets = json.load(f)
-budget_id = "72f55793-a9fc-4538-92fe-63be2c1cdddc"
-api_key = "11059c76ab063accae00d9439c417d305fdbb41d45ebcab62785a65065d29992"
-print(budget_id)
-print(api_key)
+    # secrets = json.load(f)
+    budget_id = "72f55793-a9fc-4538-92fe-63be2c1cdddc"
+    api_key = "11059c76ab063accae00d9439c417d305fdbb41d45ebcab62785a65065d29992"
+    print(budget_id)
+    print(api_key)
 
 configuration = ynab_api.Configuration(
     host="https://api.youneedabudget.com/v1")
@@ -49,7 +49,6 @@ with ynab_api.ApiClient(configuration) as api_client:
             print(x['name'])
             balance = (int(x['balance'])/10)
             print("$" + str(balance))
-            
         
         
         # pprint(api_response)

@@ -1,4 +1,5 @@
 import requests
+import json
 
 
     # Adds commas to a number
@@ -102,4 +103,9 @@ get_investment_summary(accounts)
 get_valent_summary(accounts)
 print("Total =", currency_formatter(account_balance(accounts)))
 
-# get_personal_accounts_summary(accounts)
+get_personal_accounts_summary(accounts)
+
+
+print(get_accounts())
+# pretty print json
+print(json.dumps(response.json(), indent=4, sort_keys=True))
