@@ -77,6 +77,7 @@ def get_sum(data):
 
 #make a list of the last 7 days in format YYYY-MM-dd then print it:
 last_7_days = []
+last_30_days = []
 #get today's date
 today = datetime.date.today()
 print("\n\n" + str(today) + "\n\n")
@@ -84,6 +85,12 @@ print("\n\n" + str(today) + "\n\n")
 for x in range(7):
     day = (today - timedelta(days=x)).strftime("%Y-%m-%d")
     last_7_days.append(str(day))
+
+#get the last 30 days
+for x in range(30):
+    day = (today - timedelta(days=x)).strftime("%Y-%m-%d")
+    last_30_days.append(str(day))
+
 
 #go through each day in the last_7_days list
 for x in reversed(last_7_days):
@@ -112,7 +119,22 @@ for x in reversed(last_7_days):
     print("Total: $" + '{:,.2f}'.format(total_for_day) + "\n\n\n\n")
 
 #print total for the week:
-print("\n")
-total_for_week = sum(int(x['amount']) for x in transactions if x['date'] in last_7_days)
-total_for_week_formatted = '${:,.2f}'.format(total_for_week)
-print("Total for the week: " + total_for_week_formatted)
+def get_all():
+    total_for_week = sum(int(x['amount']) for x in transactions if x['date'] in last_7_days)
+    total_for_week_formatted = '${:,.2f}'.format(total_for_week)
+    print("Total for the week: " + total_for_week_formatted)
+    total_for_past_30_days = sum(int(x['amount']) for x in transactions if x['date'] in last_30_days)
+    total_for_past_30_days_formatted = '${:,.2f}'.format(total_for_past_30_days)
+    
+    print("Total for the past 30 days: " + total_for_past_30_days_formatted)
+    
+    return total_for_past_30_days_formatted
+    
+
+get_all()
+
+# TODO:
+# 1. Create a function that will get the total for the past 30 days
+# 2. Create a function that will get the total for the past 7 days
+# 3. Create a function that will get the total for the past 30 days and the past 7 days
+
