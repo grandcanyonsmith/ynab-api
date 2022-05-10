@@ -10,8 +10,9 @@ headers = {
 
 
 def main():
-    # Import transactions
-    transactions = import_transactions(url, headers)
+    import_transactions(url, headers)
+    create_pdf(accounts = get_accounts() )
+
 
 main()
-    
+

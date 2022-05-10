@@ -137,4 +137,3 @@ get_all()
 # 1. Create a function that will get the total for the past 30 days
 # 2. Create a function that will get the total for the past 7 days
 # 3. Create a function that will get the total for the past 30 days and the past 7 days
-

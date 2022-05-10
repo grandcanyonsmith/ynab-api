@@ -1,9 +1,9 @@
+
 import requests
 import os
 import datetime
 from reportlab.pdfgen import canvas
 from transactions import get_all
-
 
 headers = {
     'accept': 'application/json',
@@ -15,23 +15,20 @@ params = (
 response = requests.get(
 
     'https://api.youneedabudget.com/v1/budgets', headers=headers, params=params)
-# Adds commas to a number
+
 def add_commas(number):
     return '{:,}'.format(round(number, 2))
 
-# Rounds a number to 2 decimal places
 def round_decimal(number):
     return round(number, 2)
-# Returns the balance of a list of accounts
+
 def print_account(account):
     print(account['name'])
 
-# Formats a number to currency
+
 def currency_formatter(number):
     return '$' + str(add_commas(round_decimal(number)))
-    # Returns the balance of a list of accounts
 
-# Recursive function to get account summary
 def get_account_summary(accounts, name, account_ids, index=0, total=0):
     if index < len(accounts): 
         if accounts[index]['id'] in account_ids:
@@ -40,31 +37,24 @@ def get_account_summary(accounts, name, account_ids, index=0, total=0):
     else:
         print(name + " = " + currency_formatter(total)) 
 
-
-# Returns the balance of a list of accounts
 def account_balance(accounts): 
     return accounts[0]['balance'] / 1000 + account_balance(accounts[1:]) if len(accounts) > 1 else accounts[0]['balance'] / 1000 if len(accounts) > 0 else 0
 
-# Return on the balance of the accounts     valent_accounts = [        'c909d550-cbdc-4ddc-8fa8-c8b51dca1520','2504ddd0-0f69-4d69-8e3a-59d63d812202'    ]
 def get_valent_balance():
     valent_accounts = [
         'c909d550-cbdc-4ddc-8fa8-c8b51dca1520',
         '2504ddd0-0f69-4d69-8e3a-59d63d812202'
     ]
-    valent_balance = sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in valent_accounts])
-    return valent_balance
+    return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in valent_accounts])
 
-# get investment accounts balance
 def get_investment_balance():
     investment_accounts = [
         '483ce002-1231-4742-ba7b-5f70cc62731f',
         'a5f65be8-bb2d-407b-98fa-ebf5c8f576c5',
         '83d81f72-d939-4f63'
     ]
-    
     return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in investment_accounts])
 
-# get personal accounts balance
 def get_personal_balance():
     personal_accounts = [ 
         'a301f214-607e-47e7-9e94-90fb426be953',
@@ -75,25 +65,32 @@ def get_personal_balance():
     ]
     return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in personal_accounts])
 
-
-
-        
 def get_personal_accounts_summary(accounts):
-    personal_accounts = [ 'a301f214-607e-47e7-9e94-90fb426be953', '97f99b64-425d-4407-9491-d223fba06e1f', 'f41de13e-0e7a-4be4-838f-07c059272c68', '3f3cd0a4-37aa-4ced-8ba4-bf8fa0489d11', '3ba80db1-01e3-408a-80ef-ef17d34ac59a', '3ba80db1-01e3-408a-80ef-ef17d34ac59a']
+    personal_accounts = [
+        'a301f214-607e-47e7-9e94-90fb426be953',
+        '97f99b64-425d-4407-9491-d223fba06e1f',
+        'f41de13e-0e7a-4be4-838f-07c059272c68',
+        '3f3cd0a4-37aa-4ced-8ba4-bf8fa0489d11',
+        '3ba80db1-01e3-408a-80ef-ef17d34ac59a',
+        '3ba80db1-01e3-408a-80ef-ef17d34ac59a'
+    ]
     return sorted([account['name'] + " = " + currency_formatter(account_balance([account])) for account in accounts if account['id'] in personal_accounts], reverse=True)
 
-
 def get_valent_summary(accounts):
-    valent_accounts = ['c909d550-cbdc-4ddc-8fa8-c8b51dca1520', '2504ddd0-0f69-4d69-8e3a-59d63d812202']
+    valent_accounts = [
+        'c909d550-cbdc-4ddc-8fa8-c8b51dca1520',
+        '2504ddd0-0f69-4d69-8e3a-59d63d812202'
+    ]
     return sorted([account['name'] + " = " + currency_formatter(account_balance([account])) for account in accounts if account['id'] in valent_accounts], reverse=True)
 
 def get_investment_summary(accounts):
-    investment_accounts = ['483ce002-1231-4742-ba7b-5f70cc62731f', 'a5f65be8-bb2d-407b-98fa-ebf5c8f576c5', '83d81f72-d939-4f63']
+    investment_accounts = [
+        '483ce002-1231-4742-ba7b-5f70cc62731f',
+        'a5f65be8-bb2d-407b-98fa-ebf5c8f576c5',
+        '83d81f72-d939-4f63-b8de-38a242b024e1'
+    ]
     return sorted([account['name'] + " = " + currency_formatter(account_balance([account])) for account in accounts if account['id'] in investment_accounts], reverse=True)
 
-
-
-# Returns a list of accounts
 def get_accounts():
     accounts = []
     personal_accounts = [
@@ -123,8 +120,6 @@ def get_accounts():
 
 
 get_personal_accounts_summary(get_accounts())
-
-# Creates a PDF 
 
 # Creates a PDF 
 def create_pdf(accounts):
@@ -160,17 +155,17 @@ def create_pdf(accounts):
     os.system("open report.pdf")
 
     
-    
-accounts = get_accounts()
-print(accounts)
-get_account_summary(accounts, "Personal", ['a301f214-607e-47e7-9e94-90fb426be953', '97f99b64-425d-4407-9491-d223fba06e1f', 'f41de13e-0e7a-4be4-838f-07c059272c68', '3f3cd0a4-37aa-4ced-8ba4-bf8fa0489d11', '3ba80db1-01e3-408a-80ef-ef17d34ac59a'])
-get_valent_summary(accounts)
-print("Total =", currency_formatter(account_balance(accounts)))
-create_pdf(accounts)
-
-print(get_valent_balance())
-print(get_valent_summary(accounts))
-print(get_investment_summary(accounts))
+#
+# accounts = get_accounts()
+# print(accounts)
+# get_account_summary(accounts, "Personal", ['a301f214-607e-47e7-9e94-90fb426be953', '97f99b64-425d-4407-9491-d223fba06e1f', 'f41de13e-0e7a-4be4-838f-07c059272c68', '3f3cd0a4-37aa-4ced-8ba4-bf8fa0489d11', '3ba80db1-01e3-408a-80ef-ef17d34ac59a'])
+# get_valent_summary(accounts)
+# print("Total =", currency_formatter(account_balance(accounts)))
+# create_pdf(accounts)
+#
+# print(get_valent_balance())
+# print(get_valent_summary(accounts))
+# print(get_investment_summary(accounts))
 
 # TODO:
 # 1. Create a PDF report
