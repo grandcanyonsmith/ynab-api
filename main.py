@@ -11,7 +11,7 @@ headers = {
 
 def main():
     import_transactions(url, headers)
-    create_pdf(accounts = get_accounts() )
+    create_pdf(accounts = get_accounts( ))
 
 
 main()
