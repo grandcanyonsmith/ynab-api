@@ -549,14 +549,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['data'] = \
-            data
+                data
         return self.create_transaction_endpoint.call_with_http_info(**kwargs)
 
     def get_transaction_by_id(self, budget_id, transaction_id, **kwargs):
@@ -603,14 +603,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['transaction_id'] = \
-            transaction_id
+                transaction_id
         return self.get_transaction_by_id_endpoint.call_with_http_info(
             **kwargs)
 
@@ -660,12 +660,12 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         return self.get_transactions_endpoint.call_with_http_info(**kwargs)
 
     def get_transactions_by_account(self, budget_id, account_id, **kwargs):
@@ -715,14 +715,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['account_id'] = \
-            account_id
+                account_id
         return self.get_transactions_by_account_endpoint.call_with_http_info(
             **kwargs)
 
@@ -772,14 +772,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['category_id'] = \
-            category_id
+                category_id
         return self.get_transactions_by_category_endpoint.call_with_http_info(
             **kwargs)
 
@@ -830,14 +830,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['payee_id'] = \
-            payee_id
+                payee_id
         return self.get_transactions_by_payee_endpoint.call_with_http_info(
             **kwargs)
 
@@ -884,12 +884,12 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         return self.import_transactions_endpoint.call_with_http_info(**kwargs)
 
     def update_transaction(self, budget_id, transaction_id, data, **kwargs):
@@ -937,16 +937,16 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['transaction_id'] = \
-            transaction_id
+                transaction_id
         kwargs['data'] = \
-            data
+                data
         return self.update_transaction_endpoint.call_with_http_info(**kwargs)
 
     def update_transactions(self, budget_id, data, **kwargs):
@@ -993,14 +993,14 @@ class TransactionsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['data'] = \
-            data
+                data
         return self.update_transactions_endpoint.call_with_http_info(**kwargs)
 
 

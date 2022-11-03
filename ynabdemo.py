@@ -48,10 +48,10 @@ with ynab_api.ApiClient(configuration) as api_client:
         for x in api_response['data']['accounts']:
             print(x['name'])
             balance = (int(x['balance'])/10)
-            print("$" + str(balance))
-        
-        
-        # pprint(api_response)
+            print(f"${str(balance)}")
+                    
+            
+            # pprint(api_response)
     except ynab_api.ApiException as e:
         print("Exception: %s\n" % e)
 # curl -X GET "https://api.youneedabudget.com/v1/budgets/72f55793-a9fc-4538-92fe-63be2c1cdddc/accounts" -H "accept: application/json" -H "Authorization: Bearer 11059c76ab063accae00d9439c417d305fdbb41d45ebcab62785a65065d29992"

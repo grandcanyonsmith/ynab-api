@@ -18,7 +18,12 @@ def get_transactions(budget_id, month):
         ('since_date', (datetime.datetime.now() - timedelta(days=365)).strftime("%Y-%m-%d")),
     )
 
-    response = requests.get('https://api.youneedabudget.com/v1/budgets/' + budget_id + '/transactions', headers=headers, params=params).json()
+    response = requests.get(
+        f'https://api.youneedabudget.com/v1/budgets/{budget_id}/transactions',
+        headers=headers,
+        params=params,
+    ).json()
+
 
     if month == 'all':
         return response
@@ -56,7 +61,7 @@ def print_income_for_date(date, transactions, level, date_format, date_format_fo
         print("Total: $" + '{:,.2f}'.format(total_for_date)) 
 
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
         
 print_income_for_date('2022-04-01', transactions, 'day', "%b. %d (%a)", "%Y-%m-%d", True)
 
@@ -68,7 +73,13 @@ def print_income_for_date(date, transactions, level, date_format, date_format_fo
     grouped_transactions_by_name = get_sum_of_income(transactions_that_date)
 
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])) + " " + level)
+        print(
+            f'{y}: $'
+            + '{:,.2f}'.format((grouped_transactions_by_name[y]))
+            + " "
+            + level
+        )
+
 
     if print_total:
         total_for_date = sum(float(x['amount']) for x in transactions_that_date)
@@ -83,7 +94,13 @@ def print_income_for_year(year, transactions, level, date_format, date_format_fo
     grouped_transactions_by_name = get_sum_of_income(transactions_that_year)
 
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])) + " " + level)
+        print(
+            f'{y}: $'
+            + '{:,.2f}'.format((grouped_transactions_by_name[y]))
+            + " "
+            + level
+        )
+
 
     total_for_year = sum(float(x['amount']) for x in transactions_that_year)
     print("Total: $" + '{:,.2f}'.format(total_for_year))

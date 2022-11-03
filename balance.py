@@ -27,15 +27,15 @@ def print_account(account):
 
 
 def currency_formatter(number):
-    return '$' + str(add_commas(round_decimal(number)))
+    return f'${str(add_commas(round_decimal(number)))}'
 
 def get_account_summary(accounts, name, account_ids, index=0, total=0):
     if index < len(accounts): 
         if accounts[index]['id'] in account_ids:
             total += account_balance([accounts[index]])
-        return get_account_summary(accounts, name, account_ids, index + 1, total) 
+        return get_account_summary(accounts, name, account_ids, index + 1, total)
     else:
-        print(name + " = " + currency_formatter(total)) 
+        print(f"{name} = {currency_formatter(total)}") 
 
 def account_balance(accounts): 
     return accounts[0]['balance'] / 1000 + account_balance(accounts[1:]) if len(accounts) > 1 else accounts[0]['balance'] / 1000 if len(accounts) > 0 else 0
@@ -45,7 +45,11 @@ def get_valent_balance():
         'c909d550-cbdc-4ddc-8fa8-c8b51dca1520',
         '2504ddd0-0f69-4d69-8e3a-59d63d812202'
     ]
-    return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in valent_accounts])
+    return sum(
+        account['balance'] / 1000
+        for account in response.json()['data']['budgets'][0]['accounts']
+        if account['id'] in valent_accounts
+    )
 
 def get_investment_balance():
     investment_accounts = [
@@ -53,7 +57,11 @@ def get_investment_balance():
         'a5f65be8-bb2d-407b-98fa-ebf5c8f576c5',
         '83d81f72-d939-4f63'
     ]
-    return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in investment_accounts])
+    return sum(
+        account['balance'] / 1000
+        for account in response.json()['data']['budgets'][0]['accounts']
+        if account['id'] in investment_accounts
+    )
 
 def get_personal_balance():
     personal_accounts = [ 
@@ -63,7 +71,11 @@ def get_personal_balance():
         '3f3cd0a4-37aa-4ced-8ba4-bf8fa0489d11',
         '3ba80db1-01e3-408a-80ef-ef17d34ac59a'
     ]
-    return sum([account['balance'] / 1000 for account in response.json()['data']['budgets'][0]['accounts'] if account['id'] in personal_accounts])
+    return sum(
+        account['balance'] / 1000
+        for account in response.json()['data']['budgets'][0]['accounts']
+        if account['id'] in personal_accounts
+    )
 
 def get_personal_accounts_summary(accounts):
     personal_accounts = [
@@ -128,30 +140,43 @@ def create_pdf(accounts):
     c.setLineWidth(.3)
     c.drawString(480, 750, datetime.date.today().strftime("%B %d, %Y"))
     c.line(480, 747, 580, 747)
-    c.drawString(100, 750, "Personal Balance: " + currency_formatter(get_personal_balance()))
+    c.drawString(
+        100,
+        750,
+        f"Personal Balance: {currency_formatter(get_personal_balance())}",
+    )
+
     # Print the 3 sub-accounts of personal accounts under the Personal heading
     list_to_string = get_personal_accounts_summary(accounts)
     y = 0
     for i in range(len(list_to_string)):
         print(list_to_string[i])
-        c.drawString(130, 720 - (i * 20), "- " + list_to_string[i])
+        c.drawString(130, 720 - (i * 20), f"- {list_to_string[i]}")
         y = y + 20
-    c.drawString(100, 600, "Investment Balance: " + currency_formatter(get_investment_balance()))   
+    c.drawString(
+        100,
+        600,
+        f"Investment Balance: {currency_formatter(get_investment_balance())}",
+    )
+
     list_to_string = get_investment_summary(accounts)
     y = 0
     for i in range(len(list_to_string)):
         print(list_to_string[i])
-        c.drawString(130, 550 - (i * 20), "- " + list_to_string[i])
-        
-    c.drawString(100, 400, "Valent Balance: " + currency_formatter(get_valent_balance())) 
+        c.drawString(130, 550 - (i * 20), f"- {list_to_string[i]}")
+
+    c.drawString(
+        100, 400, f"Valent Balance: {currency_formatter(get_valent_balance())}"
+    )
+
     list_to_string = get_valent_summary(accounts)
     for i in range(len(list_to_string)):
         print(list_to_string[i])
-        c.drawString(130, 380 - (i * 20), "- " + list_to_string[i])
+        c.drawString(130, 380 - (i * 20), f"- {list_to_string[i]}")
 
-    c.drawString(100, 100, "Total Expenses this week: " + expenses)
+    c.drawString(100, 100, f"Total Expenses this week: {expenses}")
     c.showPage()
-    c.save() 
+    c.save()
     os.system("open report.pdf")
 
     

@@ -201,12 +201,12 @@ class BudgetsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         return self.get_budget_by_id_endpoint.call_with_http_info(**kwargs)
 
     def get_budget_settings_by_id(self, budget_id, **kwargs):
@@ -252,12 +252,12 @@ class BudgetsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         return self.get_budget_settings_by_id_endpoint.call_with_http_info(
             **kwargs)
 
@@ -303,7 +303,7 @@ class BudgetsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
