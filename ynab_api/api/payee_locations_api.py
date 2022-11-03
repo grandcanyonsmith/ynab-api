@@ -203,14 +203,14 @@ class PayeeLocationsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['payee_location_id'] = \
-            payee_location_id
+                payee_location_id
         return self.get_payee_location_by_id_endpoint.call_with_http_info(
             **kwargs)
 
@@ -257,12 +257,12 @@ class PayeeLocationsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         return self.get_payee_locations_endpoint.call_with_http_info(**kwargs)
 
     def get_payee_locations_by_payee(self, budget_id, payee_id, **kwargs):
@@ -309,13 +309,13 @@ class PayeeLocationsApi(object):
         kwargs['_return_http_data_only'] = kwargs.get('_return_http_data_only',
                                                       True)
         kwargs['_preload_content'] = kwargs.get('_preload_content', True)
-        kwargs['_request_timeout'] = kwargs.get('_request_timeout', None)
+        kwargs['_request_timeout'] = kwargs.get('_request_timeout')
         kwargs['_check_input_type'] = kwargs.get('_check_input_type', True)
         kwargs['_check_return_type'] = kwargs.get('_check_return_type', True)
         kwargs['_host_index'] = kwargs.get('_host_index')
         kwargs['budget_id'] = \
-            budget_id
+                budget_id
         kwargs['payee_id'] = \
-            payee_id
+                payee_id
         return self.get_payee_locations_by_payee_endpoint.call_with_http_info(
             **kwargs)

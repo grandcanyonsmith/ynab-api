@@ -21,15 +21,7 @@ params = (
 )
 
 response = requests.get('https://api.youneedabudget.com/v1/budgets/72f55793-a9fc-4538-92fe-63be2c1cdddc/transactions', headers=headers, params=params).json()['data']['transactions']
-transactions = []
-
-
-# get the expenses for the last 30 days
-for i in response:
-    if i['amount'] < 0:
-        transactions.append(i)
-    else:
-        pass
+transactions = [i for i in response if i['amount'] < 0]
 
 # get the expenses for the last 30 days
 def get_sum_of_expenses(data):
@@ -47,7 +39,7 @@ def print_expenses_for_day(date, transactions):
     total_for_date = sum(float(x['amount']) for x in transactions_that_date)
     print("Total: $" + '{:,.2f}'.format(total_for_date))
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
 
 # Prints the expenses for a given month
 def print_expenses_for_month(month, transactions):
@@ -56,9 +48,6 @@ def print_expenses_for_month(month, transactions):
     for y in transactions:
         if month in y['date']:
             transactions_that_month.append(y)
-        else:
-            pass
-
     grouped_transactions_by_name = get_sum_of_expenses(transactions_that_month)
     print("grouped",grouped_transactions_by_name)
 
@@ -90,15 +79,10 @@ def print_expenses_for_month(month, transactions):
 # Prints the expenses for a given year
 def print_expenses_for_year(year, transactions):
     print("\n\n" + time.strftime("%Y", time.strptime(year, "%Y")))
-    transactions_that_year = []
-    for y in transactions:
-        if year in y['date']:
-            transactions_that_year.append(y)
-        else:
-            pass
+    transactions_that_year = [y for y in transactions if year in y['date']]
     grouped_transactions_by_name = get_sum_of_expenses(transactions_that_year)
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
 
 
 

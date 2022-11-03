@@ -18,12 +18,10 @@ transactions = []
 
 
 def remove_period_from_payee_name(payee_name):
-    #if payee_name contains a period then remove everything after the period and return the payee_name, else return the payee_name:
-    if payee_name.find(".") != -1:
-        payee_name = payee_name[:payee_name.find(".")]
-        return remove_period_from_payee_name(payee_name)
-    else:
+    if payee_name.find(".") == -1:
         return payee_name
+    payee_name = payee_name[:payee_name.find(".")]
+    return remove_period_from_payee_name(payee_name)
 
 #create a function to format the payee_name as camel case:
 def format_payee_name_as_camel_case(payee_name):
@@ -35,9 +33,7 @@ def format_payee_name_as_camel_case(payee_name):
 #go through each transaction in the response:
 for x in response:
     #if the amount is negative then skip it and go to the next transaction:
-    if '-' not in str(x['amount']):
-        pass
-    else:
+    if '-' in str(x['amount']):
         #get the payee_name from the transaction:
         payee_name = x['payee_name']
         #remove any words from the payee_name that contain any digit
@@ -99,19 +95,14 @@ for x in reversed(last_7_days):
     print(time.strftime("%b. %d", time.strptime(x, "%Y-%m-%d")) + " ("+ time.strftime("%a", time.strptime(x, "%Y-%m-%d"))+")\n\n\n\n")
 
     #get all of the transactions for that day and group them by payee_name
-    transactions_that_day = []
-    for y in transactions:
-        if x == y['date']:
-            transactions_that_day.append(y)
-        else:
-            pass
+    transactions_that_day = [y for y in transactions if x == y['date']]
     #group the transactions by payee_name
     grouped_transactions_by_name = get_sum(transactions_that_day)
 
     #print the payee_name and the amount
     for y in grouped_transactions_by_name:
         #print the total for the day
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
 
     #get the total for the day
     total_for_day = sum(int(x['amount']) for x in transactions_that_day)
@@ -122,12 +113,12 @@ for x in reversed(last_7_days):
 def get_all():
     total_for_week = sum(int(x['amount']) for x in transactions if x['date'] in last_7_days)
     total_for_week_formatted = '${:,.2f}'.format(total_for_week)
-    print("Total for the week: " + total_for_week_formatted)
+    print(f"Total for the week: {total_for_week_formatted}")
     total_for_past_30_days = sum(int(x['amount']) for x in transactions if x['date'] in last_30_days)
     total_for_past_30_days_formatted = '${:,.2f}'.format(total_for_past_30_days)
-    
-    print("Total for the past 30 days: " + total_for_past_30_days_formatted)
-    
+
+    print(f"Total for the past 30 days: {total_for_past_30_days_formatted}")
+
     return total_for_past_30_days_formatted
     
 

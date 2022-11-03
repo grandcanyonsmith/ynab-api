@@ -29,7 +29,7 @@ def print_income_for_day(date, transactions):
     print("Total: $" + '{:,.2f}'.format(total_for_date)) 
 
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
         
         
 def print_income_for_month(month, transactions):
@@ -37,16 +37,11 @@ def print_income_for_month(month, transactions):
 
 # Prints the income for a given month
 
-    transactions_that_month = []
-    for y in transactions:
-        if month in y['date']:
-            transactions_that_month.append(y)
-        else:
-            pass
+    transactions_that_month = [y for y in transactions if month in y['date']]
     grouped_transactions_by_name = get_sum_of_income(transactions_that_month)
 
     for y in grouped_transactions_by_name:
-        print(y + ': $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
+        print(f'{y}: $' + '{:,.2f}'.format((grouped_transactions_by_name[y])))
 
     total_for_month = sum(float(x['amount']) for x in transactions_that_month)
     print("Total: $" + '{:,.2f}'.format(total_for_month))
@@ -76,11 +71,14 @@ for x in response:
         account_name = x['account_name']
 
         date = x['date']
-        data = {"payee_name": str(payee_name), "amount": amount, "date": str(date), "account": account_name}
-        transactions.append(data)
+        data = {
+            "payee_name": payee_name,
+            "amount": amount,
+            "date": str(date),
+            "account": account_name,
+        }
 
-    else:
-        pass
+        transactions.append(data)
 
 '''
 for x in transactions:
@@ -112,7 +110,7 @@ def print_total_for_week(last_days, transactions):
     print("\n\n")
     total_for_week = sum(float(x['amount']) for x in transactions if x['date'] in last_days)
     total_for_week_formatted = '${:,.2f}'.format(total_for_week)
-    print("Total for the week: " + total_for_week_formatted)
+    print(f"Total for the week: {total_for_week_formatted}")
 
 # Prints the income for the last month
 

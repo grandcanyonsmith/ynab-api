@@ -9,9 +9,7 @@ headers = {
 }
 
 def get_payee_locations(payee_id):
-    url = 'https://api.youneedabudget.com/v1/payees/{}/payee_locations'.format(payee_id)
+    url = f'https://api.youneedabudget.com/v1/payees/{payee_id}/payee_locations'
     response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        return None
-    return response.json()
+    return None if response.status_code != 200 else response.json()
 

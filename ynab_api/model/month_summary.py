@@ -114,7 +114,7 @@ class MonthSummary(ModelNormal):
     @convert_js_args_to_python_args
     def _from_openapi_data(cls, month, income, budgeted, activity,
                            to_be_budgeted, deleted, *args,
-                           **kwargs):  # noqa: E501
+                           **kwargs):    # noqa: E501
         """MonthSummary - a model defined in OpenAPI
 
         Args:
@@ -170,14 +170,11 @@ class MonthSummary(ModelNormal):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
-                % (
-                    args,
-                    self.__class__.__name__,
-                ),
+                f"Invalid positional arguments={args} passed to {self.__class__.__name__}. Remove those invalid positional arguments.",
                 path_to_item=_path_to_item,
-                valid_classes=(self.__class__, ),
+                valid_classes=(self.__class__,),
             )
+
 
         self._data_store = {}
         self._check_type = _check_type
@@ -195,9 +192,9 @@ class MonthSummary(ModelNormal):
         self.deleted = deleted
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
-                        self._configuration is not None and \
-                        self._configuration.discard_unknown_keys and \
-                        self.additional_properties_type is None:
+                            self._configuration is not None and \
+                            self._configuration.discard_unknown_keys and \
+                            self.additional_properties_type is None:
                 # discard variable.
                 continue
             setattr(self, var_name, var_value)
@@ -214,7 +211,7 @@ class MonthSummary(ModelNormal):
 
     @convert_js_args_to_python_args
     def __init__(self, month, income, budgeted, activity, to_be_budgeted,
-                 deleted, *args, **kwargs):  # noqa: E501
+                 deleted, *args, **kwargs):    # noqa: E501
         """MonthSummary - a model defined in OpenAPI
 
         Args:
@@ -268,14 +265,11 @@ class MonthSummary(ModelNormal):
 
         if args:
             raise ApiTypeError(
-                "Invalid positional arguments=%s passed to %s. Remove those invalid positional arguments."
-                % (
-                    args,
-                    self.__class__.__name__,
-                ),
+                f"Invalid positional arguments={args} passed to {self.__class__.__name__}. Remove those invalid positional arguments.",
                 path_to_item=_path_to_item,
-                valid_classes=(self.__class__, ),
+                valid_classes=(self.__class__,),
             )
+
 
         self._data_store = {}
         self._check_type = _check_type
@@ -293,9 +287,9 @@ class MonthSummary(ModelNormal):
         self.deleted = deleted
         for var_name, var_value in kwargs.items():
             if var_name not in self.attribute_map and \
-                        self._configuration is not None and \
-                        self._configuration.discard_unknown_keys and \
-                        self.additional_properties_type is None:
+                            self._configuration is not None and \
+                            self._configuration.discard_unknown_keys and \
+                            self.additional_properties_type is None:
                 # discard variable.
                 continue
             setattr(self, var_name, var_value)
